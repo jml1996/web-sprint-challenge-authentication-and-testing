@@ -57,7 +57,7 @@ describe('/jokes', () => {
   describe('[GET] /jokes', () => {
       it('rejection without authorization header', async () => {
         const res = await request(server).get('/api/jokes')
-        expect(res.body).toBe("invalid credentials")
+        expect(res.body).toBe("token required")
       })
       it('success (200) if token', async () => {
         await request(server).post('/api/auth/register').send(user1)
