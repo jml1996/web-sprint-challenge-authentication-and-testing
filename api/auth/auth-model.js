@@ -18,8 +18,15 @@ async function findBy(username) {
 }
 
 async function add(user) {
-  const [id] = await db("users").insert(user, "id");
-  return findById(id);
+    const userExists = await db("users")
+        .select("id", "username", "password")
+        .where("username", user.username);
+    if (userExists.length > 0) {
+        return { message: "username taken" }
+    } else {
+        const [id] = await db("users").insert(user, "id");
+        return findById(id);
+    }
 }
 
 function findById(id) {

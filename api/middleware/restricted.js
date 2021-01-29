@@ -6,13 +6,13 @@ module.exports = (req, res, next) => {
   if (token) {
     jwt.verify(token, jwtSecret, (err, decoded) => {
       if (err) {
-        res.status(401).json('invalid token')
+        res.status(401).json('token invalid')
       } else {
         req.decodedJwt = decoded
         next()
       }
     })
   } else {
-    res.status(401).json('invalid credentials')
+    res.status(401).json('token required')
   }
 };
