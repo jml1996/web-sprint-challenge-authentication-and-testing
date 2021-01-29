@@ -4,11 +4,6 @@ const router = require("express").Router();
 const { jwtSecret } = require("../../config/secret.js");
 const User = require("./auth-model.js");
 const { isValid } = require("./valid-username.js");
-// const Joke = require("./jokes-model.js");
-
-// const tokenRestrict = require("./middleware/restricted.js");
-
-// const Joke = require("./jokes/");
 
 router.get("/users", (req, res) => {
   User.find()
@@ -16,19 +11,9 @@ router.get("/users", (req, res) => {
         res.status(200).json(users);
       })
       .catch(err => res.send(err));
-
-  // // User.findBy([req.body.username])
-  // //     .then(users => {
-  // //       console.log("hi")
-  // //       res.status(200).json(users);
-  // //     })
-  // //     .catch(err => res.status(500).json({ message: err}));
-
-  // const user = await User.findBy([req.body.username])
 });  
 
 router.post("/register", (req, res) => {
-    console.log(req.body)
   const credentials = req.body;
 
   if (isValid(credentials)) {
@@ -66,7 +51,6 @@ router.post("/login", (req, res) => {
         }
       })
       .catch(error => {
-        console.log(error)
         res.status(500).json({ message: error.message });
       });
   } else {

@@ -13,6 +13,6 @@ module.exports = (req, res, next) => {
       }
     })
   } else {
-    res.status(401).json('no token')
+    res.status(401).json('invalid credentials')
   }
 };
